@@ -16,7 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SwipeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.Swipe" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".IteneraryListActivity"></activity>
+
     </application>
 
 </manifest>
