@@ -48,6 +48,7 @@ public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
                     locations[index] = locations[index].substring(0, locations[index].indexOf("&#39;")) + "'" + locations[index].substring(locations[index].indexOf("&#39;") + 5, locations[index].length());
                 }
             }
+            //Tyler's pretty great.
             System.out.println("Locations: " + locations.length);
             for (int index = 0; index < locationsCount; index++) {
                 System.out.println(locations[index]);

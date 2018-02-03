@@ -44,7 +44,7 @@ public class SwipeActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
+        //Tyler's okay.
         al = new ArrayList<>();
         for(int index = 1; index < data.length; index++){
             al.add(data[index]);
