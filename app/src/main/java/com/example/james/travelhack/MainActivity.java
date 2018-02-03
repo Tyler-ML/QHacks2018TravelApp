@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        NetworkThread networkThread = new NetworkThread("https://www.tripadvisor.ca/Attractions-g154943-Activities-Vancouver_British_Columbia.html");
+        networkThread.execute();
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
