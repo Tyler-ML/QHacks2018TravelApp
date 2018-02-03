@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/QHacks2018TravelApp.iml" filepath="$PROJECT_DIR$/QHacks2018TravelApp.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/QHacks.iml" filepath="$PROJECT_DIR$/QHacks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+>>>>>>> a5abd3927681715b3998c83dd814830add3ba500
     </modules>
   </component>
 </project>
