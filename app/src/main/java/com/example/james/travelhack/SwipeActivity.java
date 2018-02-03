@@ -19,6 +19,8 @@ public class SwipeActivity extends AppCompatActivity {
     private ArrayAdapter<String> arrayAdapter;
     private int i;
     private Button button;
+    private ArrayList<Object> toGO;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +47,10 @@ public class SwipeActivity extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
-
+        toGO = new ArrayList<>();
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
+            int counter = 0;
             @Override
             public void removeFirstObjectInAdapter() {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
@@ -67,6 +70,8 @@ public class SwipeActivity extends AppCompatActivity {
             @Override
             public void onRightCardExit(Object dataObject) {
                 Toast.makeText(SwipeActivity.this, "right" ,Toast.LENGTH_SHORT).show();
+               toGO.add(dataObject) ;
+                System.out.println(toGO);
             }
 
             @Override
