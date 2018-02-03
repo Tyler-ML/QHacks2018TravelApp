@@ -50,7 +50,7 @@ public class IteneraryListActivity extends AppCompatActivity {
         public long getItemId(int position) {
             return 0;
         }
-
+        //test
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = getLayoutInflater().inflate(R.layout.itenerarylayout, parent, false);
