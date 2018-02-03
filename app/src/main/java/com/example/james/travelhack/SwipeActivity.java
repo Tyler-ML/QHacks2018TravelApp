@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class SwipeActivity extends AppCompatActivity {
 
@@ -33,9 +34,23 @@ public class SwipeActivity extends AppCompatActivity {
                 openILActivity();
             }
         });
+        String[] data = new String[0];
+        NetworkThread networkThread = new NetworkThread(data, "https://www.tripadvisor.ca/Attractions-g155019-Activities-Vancouver_British_Columbia.html");
+
+        try {
+            data = networkThread.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
         al = new ArrayList<>();
-        al.add("London Eye");
+        for(int index = 1; index < data.length; index++){
+            al.add(data[index]);
+        }
+
+/*        al.add("London Eye");
         al.add("Buckingham Palace");
         al.add("Abbey Road");
         al.add("Big Ben");
@@ -43,7 +58,7 @@ public class SwipeActivity extends AppCompatActivity {
         al.add("c++");
         al.add("css");
         al.add("javascript");
-
+*/
         arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);

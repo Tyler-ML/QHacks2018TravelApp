@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
     String url;
-    NetworkThread(String url){
+    NetworkThread(String[] data, String url){
         this.url = url;
     }
 
@@ -22,7 +22,7 @@ public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
             String content = null;
             URLConnection connection = null;
             try {
-                connection = new URL("https://www.tripadvisor.ca/Attractions-g154943-Activities-Vancouver_British_Columbia.html").openConnection();
+                connection = new URL(url).openConnection();
                 Scanner scanner = new Scanner(connection.getInputStream());
                 scanner.useDelimiter("\\Z");
                 content = scanner.next();
@@ -52,7 +52,8 @@ public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
             for (int index = 0; index < locationsCount; index++) {
                 System.out.println(locations[index]);
             }
-            return locations;
+            data = locations;
+            return data;
 
     }
 
