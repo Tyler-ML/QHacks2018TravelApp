@@ -3,66 +3,25 @@ package com.example.james.travelhack;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView mListView;
-
-    int [] images = {
-                    R.drawable.image1,
-                    R.drawable.image2
-    };
-
-    String [] names = {
-                    "CN Tower",
-                    "Ripley's Aquarium"
-
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listview_layout);
+        setContentView(R.layout.activity_main);
 
-        mListView = (ListView) findViewById(R.id.listView);
+        Button btnNext = (Button) findViewById(R.id.btnNext);
 
-        CustomAdaptor customAdaptor = new CustomAdaptor();
-        mListView.setAdapter(customAdaptor);
-    }
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Is called when button is clicked, put function here
 
-    class CustomAdaptor extends BaseAdapter {
 
-        @Override
-        public int getCount() {
-            return images.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.itenerarylayout, parent,false);
-
-            ImageView mImageView = (ImageView) view.findViewById(R.id.imageView);
-            TextView mTextView = (TextView) view.findViewById(R.id.textView);
-
-            mImageView.setImageResource(images[position]);
-            mTextView.setText(names[position]);
-
-            return view;
-        }
-
+            }
+        });
     }
 }
