@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,17 +22,21 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
     String[] text;
     private Button button;
+    private EditText location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        location = findViewById(R.id.etLocation);
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                NetworkThread networkThread = new NetworkThread("Toronto", v.getContext());
+                NetworkThread networkThread = new NetworkThread(location.getText().toString(), v.getContext());
                 networkThread.execute();
 
 
@@ -158,9 +163,6 @@ public class MainActivity extends AppCompatActivity {
 
             super.onPostExecute(locationsList);
 
-
-
-            String[] arr = locationsList;
 
             Intent i = new Intent(context, SwipeActivity.class);
             i.putExtra("locations", locationsList);
