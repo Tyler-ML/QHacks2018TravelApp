@@ -18,7 +18,8 @@
         android:layout_marginTop="15dp"
         android:background="#ffffff"
         app:rotation_degrees="15.5"
-        tools:context=".MyActivity" />
+        tools:context=".MyActivity"
+        />
 
     <ImageButton
         android:id="@+id/imageButton1"
@@ -44,10 +45,10 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etLocation"
+        android:layout_alignTop="@+id/imageButton1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="63dp"
-        android:text="Next" />
+        android:layout_marginTop="13dp"
+        android:text="Done" />
 
     <TextView
         android:id="@+id/textView2"
