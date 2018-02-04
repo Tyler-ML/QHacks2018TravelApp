@@ -96,7 +96,7 @@ public class SwipeActivity extends AppCompatActivity {
             public void onRightCardExit(Object dataObject) {
                 Toast.makeText(SwipeActivity.this, "right" ,Toast.LENGTH_SHORT).show();
 
-                if (counter < 3){
+                if (counter < 4){
 
                     newArr[counter] = (String) dataObject;
                 }

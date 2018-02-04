@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.james.travelhack.List">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="143dp"
+        android:text="Home" />
+
+    <TextView
+        android:id="@+id/tvLeave0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_below="@+id/textView8"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvLeave0"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="15dp"
+        android:text="Button" />
+
+    <TextView
+        android:id="@+id/tvDuration1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button3"
+        android:layout_marginBottom="11dp"
+        android:layout_marginStart="28dp"
+        android:layout_toEndOf="@+id/button3"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvPlace1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvLeave0"
+        android:layout_below="@+id/tvDuration1"
+        android:layout_marginTop="17dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvArrival1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPlace1"
+        android:layout_marginTop="20dp"
+        android:layout_toStartOf="@+id/tvPlace1"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvLeave1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvArrival1"
+        android:layout_toEndOf="@+id/tvPlace1"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button3"
+        android:layout_below="@+id/tvArrival1"
+        android:layout_marginTop="18dp"
+        android:text="Button" />
+
+    <TextView
+        android:id="@+id/tvPlace2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button4"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/tvArrival1"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvArrival2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvArrival1"
+        android:layout_below="@+id/tvPlace2"
+        android:layout_marginTop="21dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvLeave2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvLeave1"
+        android:layout_alignTop="@+id/tvArrival2"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btnDirections3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button4"
+        android:layout_below="@+id/tvArrival2"
+        android:layout_marginTop="22dp"
+        android:text="Button" />
+
+    <TextView
+        android:id="@+id/tvPlace3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnDirections3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvArrival3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvPlace3"
+        android:layout_below="@+id/tvPlace3"
+        android:layout_marginTop="24dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvDuration2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button4"
+        android:layout_alignEnd="@+id/tvDuration1"
+        android:layout_marginBottom="11dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvDuration3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvDuration2"
+        android:layout_alignTop="@+id/btnDirections3"
+        android:layout_marginTop="13dp"
+        android:text="TextView" />
+</RelativeLayout>
