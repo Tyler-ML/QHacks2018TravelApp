@@ -2,6 +2,8 @@ package com.example.james.travelhack;
 
 
 import android.os.AsyncTask;
+import android.widget.TextView;
+
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
@@ -12,7 +14,9 @@ import java.util.Scanner;
 
 public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
     String url;
-    NetworkThread(String[] data, String url){
+    TextView textView;
+    NetworkThread(String url, TextView textView){
+        this.textView = textView;
         this.url = url;
     }
 
@@ -27,6 +31,7 @@ public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
                 scanner.useDelimiter("\\Z");
                 content = scanner.next();
                 System.out.println("Successfully Read Webdata.");
+                System.out.println(content.substring(0, 100));
             } catch (Exception ex) {
                 ex.printStackTrace();
                 System.out.println("Unsuccessfully Read Webdata.");
@@ -48,13 +53,8 @@ public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
                     locations[index] = locations[index].substring(0, locations[index].indexOf("&#39;")) + "'" + locations[index].substring(locations[index].indexOf("&#39;") + 5, locations[index].length());
                 }
             }
-            //Tyler's pretty great.
-            System.out.println("Locations: " + locations.length);
-            for (int index = 0; index < locationsCount; index++) {
-                System.out.println(locations[index]);
-            }
-            data = locations;
-            return data;
+            //Tyler's pretty great
+            return locations;
 
     }
 
@@ -63,15 +63,17 @@ public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
         //eg: progressDialog.setMax(10);
     }
 
-    protected void onPostExecute(String locationsList[]){
-        for(int index = 0; index < locationsList.length; index++) {
-            System.out.println(locationsList[index]);
+    protected void onPostExecute(String[] locationsList){
+        String dataString = "";
+        for(int index = 0; index < locationsList.length; index++){
+            if(locationsList[index] == null){ continue;}
+            dataString += locationsList[index] + "#";
         }
+        System.out.println("me first plz");
+        textView.setText(dataString);
     }
 
     protected void onProgressUpdate(){
         //We'll need this if we want a loading bar or smtn;
     }
 }
-
-

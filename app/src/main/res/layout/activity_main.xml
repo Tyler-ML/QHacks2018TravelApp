@@ -17,6 +17,7 @@
         android:textAlignment="center"
         android:inputType="textPersonName" />
 
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"

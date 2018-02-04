@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -18,6 +19,7 @@ import butterknife.Optional;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 public class SwipeActivity extends AppCompatActivity {
@@ -26,6 +28,7 @@ public class SwipeActivity extends AppCompatActivity {
     private int i;
     private Button button;
     private ArrayList<Object> toGO;
+    private TextView textview;
 
     @Nullable @BindView(R.id.frame) SwipeFlingAdapterView flingContainer;
 
@@ -37,33 +40,31 @@ public class SwipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_swipe);
 
         button = findViewById(R.id.button);
+        textview = findViewById(R.id.textView2);
+        NetworkThread networkThread = new NetworkThread("https://www.tripadvisor.ca/Attractions-g155019-Activities-Vancouver_British_Columbia.html", textview);
+        try {
+            networkThread.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openILActivity();
             }
         });
-        String[] data = new String[0];
-        NetworkThread networkThread = new NetworkThread(data, "https://www.tripadvisor.ca/Attractions-g155019-Activities-Toronto_Ontario.html");
 
-        try {
-            data = networkThread.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        //Tyler's okay.
-        al = new ArrayList<>();
-        /*for(int index = 1; index < data.length; index++){
-            al.add(data[index]);
-        }*/
-
+        //Marcus is better.
+        al = new ArrayList<String>();
+        System.out.println(textview.getText().toString() + "me 2nd plz");
         al.add("London Eye");
         al.add("Buckingham Palace");
         al.add("Abbey Road");
         al.add("Big Ben");
-        al.add("Trafalgar Square");
+        al.add("Teen titans tower");
         al.add("c++");
         al.add("css");
         al.add("javascript");
@@ -139,6 +140,13 @@ public class SwipeActivity extends AppCompatActivity {
     public void openILActivity(){
         Intent intent2 = new Intent(this,IteneraryListActivity.class);
         startActivity(intent2);
+    }
+
+    public static int ordinalIndexOf(String str, String substr, int n) {
+        int pos = str.indexOf(substr);
+        while (--n > 0 && pos != -1)
+            pos = str.indexOf(substr, pos + 1);
+        return pos;
     }
 
 }
