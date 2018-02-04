@@ -1,3 +1,4 @@
+/*
 package com.example.james.travelhack;
 
 
@@ -15,12 +16,11 @@ import java.util.Scanner;
 /**
  * Created by Nuliflyer's Account on 2/3/2018.
  */
-
+/*
 public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
     String url;
-    TextView textView;
-    NetworkThread(String url, TextView textView){
-        this.textView = textView;
+    NetworkThread(String url){
+
         this.url = url;
     }
 
@@ -73,8 +73,8 @@ public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
             if(locationsList[index] == null){ continue;}
             dataString += locationsList[index] + "#";
         }
-        System.out.println("me first plz");
-        textView.setText(dataString);
+
+
     }
 
     protected void onProgressUpdate(){
@@ -107,4 +107,4 @@ public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
         return finalURL;
     }
 
-}
+}*/

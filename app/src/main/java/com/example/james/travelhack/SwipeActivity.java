@@ -43,14 +43,7 @@ public class SwipeActivity extends AppCompatActivity {
 
         button = findViewById(R.id.button);
         textview = findViewById(R.id.textView2);
-        NetworkThread networkThread = new NetworkThread("Toronto", textview);
-        try {
-            networkThread.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,17 +52,24 @@ public class SwipeActivity extends AppCompatActivity {
             }
         });
 
-        //Marcus is better.
+        Intent intent = getIntent();
         al = new ArrayList<String>();
+        String[] locations = intent.getStringArrayExtra("locations");
+        for(int index = 1; index < locations.length; index++){
+            al.add(locations[index]);
+        }
+
+        //Marcus is better.
+
         System.out.println(textview.getText().toString() + "me 2nd plz");
-        al.add("London Eye");
-        al.add("Buckingham Palace");
-        al.add("Abbey Road");
-        al.add("Big Ben");
-        al.add("Teen titans tower");
-        al.add("c++");
-        al.add("css");
-        al.add("javascript");
+        //al.add("London Eye");
+        //al.add("Buckingham Palace");
+        //al.add("Abbey Road");
+        //al.add("Big Ben");
+        //al.add("Teen titans tower");
+        //al.add("c++");
+        //al.add("css");
+        //al.add("javascript");
 
         arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
 
