@@ -11,10 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.BindView;
+//import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Optional;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
@@ -30,7 +28,7 @@ public class SwipeActivity extends AppCompatActivity {
     private ArrayList<Object> toGO;
     private TextView textview;
 
-    @Nullable @BindView(R.id.frame) SwipeFlingAdapterView flingContainer;
+    //@Nullable @BindView(R.id.frame) SwipeFlingAdapterView flingContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,12 +87,12 @@ public class SwipeActivity extends AppCompatActivity {
                 //Do something on the left!
                 //You also have access to the original object.
                 //If you want to use it just cast it (String) dataObject
-                Toast.makeText(SwipeActivity.this, "left" ,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SwipeActivity.this, "left" ,Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
-                Toast.makeText(SwipeActivity.this, "right" ,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SwipeActivity.this, "right" ,Toast.LENGTH_SHORT).show();
                 toGO.add(dataObject) ;
                 System.out.println(toGO);
             }
