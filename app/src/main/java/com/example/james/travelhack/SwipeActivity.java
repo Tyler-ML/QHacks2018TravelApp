@@ -2,6 +2,7 @@ package com.example.james.travelhack;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -9,24 +10,32 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Optional;
+
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class SwipeActivity extends AppCompatActivity {
-
     private ArrayList<String> al;
     private ArrayAdapter<String> arrayAdapter;
     private int i;
     private Button button;
     private ArrayList<Object> toGO;
 
+    @Nullable @BindView(R.id.frame) SwipeFlingAdapterView flingContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ButterKnife.bind(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe);
+
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +44,7 @@ public class SwipeActivity extends AppCompatActivity {
             }
         });
         String[] data = new String[0];
-        NetworkThread networkThread = new NetworkThread(data, "https://www.tripadvisor.ca/Attractions-g155019-Activities-Vancouver_British_Columbia.html");
+        NetworkThread networkThread = new NetworkThread(data, "https://www.tripadvisor.ca/Attractions-g155019-Activities-Toronto_Ontario.html");
 
         try {
             data = networkThread.execute().get();
@@ -46,11 +55,11 @@ public class SwipeActivity extends AppCompatActivity {
         }
         //Tyler's okay.
         al = new ArrayList<>();
-        for(int index = 1; index < data.length; index++){
+        /*for(int index = 1; index < data.length; index++){
             al.add(data[index]);
-        }
+        }*/
 
-/*        al.add("London Eye");
+        al.add("London Eye");
         al.add("Buckingham Palace");
         al.add("Abbey Road");
         al.add("Big Ben");
@@ -58,10 +67,10 @@ public class SwipeActivity extends AppCompatActivity {
         al.add("c++");
         al.add("css");
         al.add("javascript");
-*/
+
         arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
 
-        SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
+        final SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
         toGO = new ArrayList<>();
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
@@ -85,7 +94,7 @@ public class SwipeActivity extends AppCompatActivity {
             @Override
             public void onRightCardExit(Object dataObject) {
                 Toast.makeText(SwipeActivity.this, "right" ,Toast.LENGTH_SHORT).show();
-               toGO.add(dataObject) ;
+                toGO.add(dataObject) ;
                 System.out.println(toGO);
             }
 
@@ -110,6 +119,19 @@ public class SwipeActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(int itemPosition, Object dataObject) {
                 Toast.makeText(SwipeActivity.this, "Quit" ,Toast.LENGTH_SHORT).show();
+            }
+        });
+        findViewById(R.id.imageButton1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flingContainer.getTopCardListener().selectRight();
+            }
+        });
+
+        findViewById(R.id.imageButton2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flingContainer.getTopCardListener().selectLeft();
             }
         });
 
