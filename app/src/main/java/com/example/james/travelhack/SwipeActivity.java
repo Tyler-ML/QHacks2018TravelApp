@@ -22,6 +22,7 @@ public class SwipeActivity extends AppCompatActivity {
     private int i;
     private Button button;
     private ArrayList<Object> toGO;
+    private String[] newArr;
 
 
     @Override
@@ -87,8 +88,8 @@ public class SwipeActivity extends AppCompatActivity {
             @Override
             public void onRightCardExit(Object dataObject) {
                 Toast.makeText(SwipeActivity.this, "right" ,Toast.LENGTH_SHORT).show();
-               toGO.add(dataObject) ;
-                System.out.println(toGO);
+               newArr[counter] = (String) dataObject;
+               counter++;
             }
 
             @Override
@@ -117,7 +118,9 @@ public class SwipeActivity extends AppCompatActivity {
 
     }
     public void openILActivity(){
+        String g = "text me";
         Intent intent2 = new Intent(this,IteneraryListActivity.class);
+        intent2.putExtra("GeeGee", newArr);
         startActivity(intent2);
     }
 

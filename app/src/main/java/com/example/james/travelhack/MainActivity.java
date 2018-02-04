@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     //Tyler's pretty great.
     public void openSwipeActivity(){
     Intent intent = new Intent(this,SwipeActivity.class);
+
     startActivity(intent);
     }
 
