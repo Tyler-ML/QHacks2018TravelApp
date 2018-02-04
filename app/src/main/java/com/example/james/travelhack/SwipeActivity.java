@@ -11,10 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.BindView;
+//import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Optional;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
@@ -31,8 +29,8 @@ public class SwipeActivity extends AppCompatActivity {
     private String[] newArr = new String[3];
     private TextView textview;
 
+    //@Nullable @BindView(R.id.frame) SwipeFlingAdapterView flingContainer;
 
-    @Nullable @BindView(R.id.frame) SwipeFlingAdapterView flingContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +41,7 @@ public class SwipeActivity extends AppCompatActivity {
 
         button = findViewById(R.id.button);
         textview = findViewById(R.id.textView2);
-        NetworkThread networkThread = new NetworkThread("https://www.tripadvisor.ca/Attractions-g155019-Activities-Vancouver_British_Columbia.html", textview);
-        try {
-            networkThread.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,17 +50,24 @@ public class SwipeActivity extends AppCompatActivity {
             }
         });
 
-        //Marcus is better.
+        Intent intent = getIntent();
         al = new ArrayList<String>();
+        String[] locations = intent.getStringArrayExtra("locations");
+        for(int index = 1; index < locations.length; index++){
+            al.add(locations[index]);
+        }
+
+        //Marcus is better.
+
         System.out.println(textview.getText().toString() + "me 2nd plz");
-        al.add("London Eye");
-        al.add("Buckingham Palace");
-        al.add("Abbey Road");
-        al.add("Big Ben");
-        al.add("Teen titans tower");
-        al.add("c++");
-        al.add("css");
-        al.add("javascript");
+        //al.add("London Eye");
+        //al.add("Buckingham Palace");
+        //al.add("Abbey Road");
+        //al.add("Big Ben");
+        //al.add("Teen titans tower");
+        //al.add("c++");
+        //al.add("css");
+        //al.add("javascript");
 
         arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
 
@@ -91,7 +89,7 @@ public class SwipeActivity extends AppCompatActivity {
                 //Do something on the left!
                 //You also have access to the original object.
                 //If you want to use it just cast it (String) dataObject
-                Toast.makeText(SwipeActivity.this, "left" ,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SwipeActivity.this, "left" ,Toast.LENGTH_SHORT).show();
             }
             //arbituary value greater than the limit of three destinations
             @Override
