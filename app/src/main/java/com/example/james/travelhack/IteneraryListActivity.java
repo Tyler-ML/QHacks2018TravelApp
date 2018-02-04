@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -28,32 +25,47 @@ import java.net.URLEncoder;
 public class IteneraryListActivity extends AppCompatActivity {
 
     private int timeAtLocation = 7200;
-    String[] locations;
+    String[] locations = new String[3];
     String[] arrival = new String[3];
     String[] leave = new String[3];
     String[] duration = new String[3];
     String departure;
 
-    private TextView tvLeave1, tvLeave2, tvLeave3, tvLeave4;
+    private TextView tvLeave1, tvLeave2, tvLeave3;
     private TextView tvArrival1, tvArrival2, tvArrival3;
     private TextView tvDuration1, tvDuration2, tvDuration3;
     private TextView tvLocation1, tvLocation2, tvLocation3;
+    private String TAG = MainActivity.class.getName();
+
+    private Button btnDirections3;
 
 
     private int currTime;
-    private String TAG = MainActivity.class.getName();
     private int departureTime = 1517942615;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.IteneraryListActivity); 
+
 
         Intent i = getIntent();
         String[] selections = i.getStringArrayExtra("selections");
 
         locations = selections;
 
-        new JsonTask1().execute(createURL(locations[0], locations[1], departureTime));
+
+        btnDirections3 = (Button)findViewById(R.id.btnDirections3);
+        btnDirections3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.i(TAG,createURL(locations[0], locations[1], departureTime));
+                new JsonTask1().execute(createURL(locations[0], locations[1], departureTime));
+
+
+            }
+        });
 
     }
 
@@ -148,6 +160,8 @@ public class IteneraryListActivity extends AppCompatActivity {
 
             currTime += timeAtLocation;
 
+
+            Log.i(TAG,createURL(locations[1], locations[2], currTime));
             new JsonTask2().execute(createURL(locations[1], locations[2], currTime));
 
         }
@@ -248,6 +262,7 @@ public class IteneraryListActivity extends AppCompatActivity {
 
             currTime += timeAtLocation;
 
+            Log.i(TAG,createURL(locations[2], locations[3], currTime));
             new JsonTask3().execute(createURL(locations[2], locations[3], currTime));
 
 

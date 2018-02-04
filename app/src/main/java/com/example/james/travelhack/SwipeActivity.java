@@ -147,6 +147,7 @@ public class SwipeActivity extends AppCompatActivity {
 
         i.putExtra("selections", newArr);
         startActivity(i);
+        finishAfterTransition();
     }
 
     public static int ordinalIndexOf(String str, String substr, int n) {

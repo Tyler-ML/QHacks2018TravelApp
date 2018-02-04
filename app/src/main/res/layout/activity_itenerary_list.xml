@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvLeave0"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="13dp"
         android:text="1" />
 
     <TextView
