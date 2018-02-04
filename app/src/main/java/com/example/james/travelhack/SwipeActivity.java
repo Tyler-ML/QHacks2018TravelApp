@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 public class SwipeActivity extends AppCompatActivity {
@@ -44,21 +45,22 @@ public class SwipeActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        //Tyler's okay.
-        al = new ArrayList<>();
-        for(int index = 1; index < data.length; index++){
-            al.add(data[index]);
-        }
+        //Marcus is better.
+        al = new ArrayList<String>();
+        //ArrayList<String> al = new ArrayList<String>(Arrays.asList(data));
+        //for(int index = 0; index < data.length - 1; index++){
+          //  al.add(data[index]);
+        //}
 
-/*        al.add("London Eye");
+        al.add("London Eye");
         al.add("Buckingham Palace");
         al.add("Abbey Road");
         al.add("Big Ben");
-        al.add("Trafalgar Square");
+        al.add("Teen titans tower");
         al.add("c++");
         al.add("css");
         al.add("javascript");
-*/
+
         arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
