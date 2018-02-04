@@ -73,5 +73,3 @@ public class NetworkThread extends AsyncTask<Void, Integer, String[]>{
         //We'll need this if we want a loading bar or smtn;
     }
 }
-
-
