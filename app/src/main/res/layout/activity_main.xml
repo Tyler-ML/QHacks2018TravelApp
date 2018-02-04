@@ -14,7 +14,8 @@
         android:layout_centerVertical="true"
         android:ems="10"
         android:hint="Enter location:"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:text="" />
 
     <Button
         android:id="@+id/button"
