@@ -17,12 +17,12 @@ public class IteneraryListActivity extends AppCompatActivity {
             //R.drawable.image1,
             //R.drawable.image2
     };
-
-    String[] names = {
+    String [] name = getIntent().getExtras().getStringArray("GeeGee");
+    /*String[] names = {
             "CN Tower",
             "Ripley's Aquarium"
 
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class IteneraryListActivity extends AppCompatActivity {
             TextView mTextView = (TextView) view.findViewById(R.id.textView);
 
             mImageView.setImageResource(images[position]);
-            mTextView.setText(names[position]);
+            mTextView.setText(name[position]);
 
             return view;
         }

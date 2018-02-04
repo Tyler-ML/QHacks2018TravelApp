@@ -26,9 +26,11 @@ public class SwipeActivity extends AppCompatActivity {
     private int i;
     private Button button;
     private ArrayList<Object> toGO;
+    private String[] newArr;
     private TextView textview;
 
     //@Nullable @BindView(R.id.frame) SwipeFlingAdapterView flingContainer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class SwipeActivity extends AppCompatActivity {
 
         button = findViewById(R.id.button);
         textview = findViewById(R.id.textView2);
-        NetworkThread networkThread = new NetworkThread("https://www.tripadvisor.ca/Attractions-g155019-Activities-Vancouver_British_Columbia.html", textview);
+        NetworkThread networkThread = new NetworkThread("Toronto", textview);
         try {
             networkThread.execute().get();
         } catch (InterruptedException e) {
@@ -89,12 +91,13 @@ public class SwipeActivity extends AppCompatActivity {
                 //If you want to use it just cast it (String) dataObject
                 //Toast.makeText(SwipeActivity.this, "left" ,Toast.LENGTH_SHORT).show();
             }
-
+            String[] newArr =  new String[10];//arbituary value greater than the limit of three destinations
             @Override
             public void onRightCardExit(Object dataObject) {
                 //Toast.makeText(SwipeActivity.this, "right" ,Toast.LENGTH_SHORT).show();
                 toGO.add(dataObject) ;
                 System.out.println(toGO);
+
             }
 
             @Override
@@ -136,7 +139,9 @@ public class SwipeActivity extends AppCompatActivity {
 
     }
     public void openILActivity(){
+        String g = "text me";
         Intent intent2 = new Intent(this,IteneraryListActivity.class);
+        intent2.putExtra("GeeGee", newArr);
         startActivity(intent2);
     }
 
