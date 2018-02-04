@@ -43,7 +43,7 @@ public class SwipeActivity extends AppCompatActivity {
 
         button = findViewById(R.id.button);
         textview = findViewById(R.id.textView2);
-        NetworkThread networkThread = new NetworkThread("https://www.tripadvisor.ca/Attractions-g155019-Activities-Vancouver_British_Columbia.html", textview);
+        NetworkThread networkThread = new NetworkThread("Toronto", textview);
         try {
             networkThread.execute().get();
         } catch (InterruptedException e) {
