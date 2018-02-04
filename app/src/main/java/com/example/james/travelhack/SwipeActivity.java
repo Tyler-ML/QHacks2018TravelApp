@@ -93,16 +93,12 @@ public class SwipeActivity extends AppCompatActivity {
                 //If you want to use it just cast it (String) dataObject
                 Toast.makeText(SwipeActivity.this, "left" ,Toast.LENGTH_SHORT).show();
             }
-
+            String[] newArr =  new String[10];//arbituary value greater than the limit of three destinations
             @Override
             public void onRightCardExit(Object dataObject) {
                 Toast.makeText(SwipeActivity.this, "right" ,Toast.LENGTH_SHORT).show();
-
                newArr[counter] = (String) dataObject;
                counter++;
-                toGO.add(dataObject) ;
-                System.out.println(toGO);
-
             }
 
             @Override
