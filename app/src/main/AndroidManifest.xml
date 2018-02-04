@@ -25,7 +25,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IteneraryListActivity"></activity>
+        <activity android:name=".IteneraryListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.IteneraryList" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 

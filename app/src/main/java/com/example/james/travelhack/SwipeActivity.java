@@ -28,7 +28,7 @@ public class SwipeActivity extends AppCompatActivity {
     private int i;
     private Button button;
     private ArrayList<Object> toGO;
-    private String[] newArr;
+    private String[] newArr = new String[3];
     private TextView textview;
 
 
@@ -93,11 +93,16 @@ public class SwipeActivity extends AppCompatActivity {
                 //If you want to use it just cast it (String) dataObject
                 Toast.makeText(SwipeActivity.this, "left" ,Toast.LENGTH_SHORT).show();
             }
-            String[] newArr =  new String[10];//arbituary value greater than the limit of three destinations
+            //arbituary value greater than the limit of three destinations
             @Override
             public void onRightCardExit(Object dataObject) {
                 Toast.makeText(SwipeActivity.this, "right" ,Toast.LENGTH_SHORT).show();
-               newArr[counter] = (String) dataObject;
+
+                if (counter < 3){
+
+                    newArr[counter] = (String) dataObject;
+                }
+
                counter++;
             }
 
@@ -140,10 +145,10 @@ public class SwipeActivity extends AppCompatActivity {
 
     }
     public void openILActivity(){
-        String g = "text me";
-        Intent intent2 = new Intent(this,IteneraryListActivity.class);
-        intent2.putExtra("GeeGee", newArr);
-        startActivity(intent2);
+        Intent i = new Intent(this,IteneraryListActivity.class);
+
+        i.putExtra("selections", newArr);
+        startActivity(i);
     }
 
     public static int ordinalIndexOf(String str, String substr, int n) {

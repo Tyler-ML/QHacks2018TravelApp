@@ -1,5 +1,6 @@
 package com.example.james.travelhack;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,21 +13,28 @@ import android.widget.TextView;
 public class IteneraryListActivity extends AppCompatActivity {
 
     ListView mListView;
-
-    int[] images = {
-            //R.drawable.image1,
-            //R.drawable.image2
+    //Intent i = getIntent();
+    //Bundle extras=i.getExtras();
+    //String name[]= extras.getStringArray("Gee");
+    //Bundle b = this.getIntent().getExtras();
+    //String[] name=b.getStringArray("Gee");
+    int[] images = {R.drawable.image1,
+            R.drawable.image2
     };
-    String [] name = getIntent().getExtras().getStringArray("GeeGee");
-    /*String[] names = {
+    //String [] name = getIntent().getExtras().getStringArray("GeeGee");
+
+    String[] names = {
             "CN Tower",
             "Ripley's Aquarium"
 
-    };*/
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent i = getIntent();
+        String[] selections = i.getStringArrayExtra("selections");
         setContentView(R.layout.activity_itenerary_list);
         mListView = (ListView) findViewById(R.id.listView);
 
@@ -59,7 +67,7 @@ public class IteneraryListActivity extends AppCompatActivity {
             TextView mTextView = (TextView) view.findViewById(R.id.textView);
 
             mImageView.setImageResource(images[position]);
-            mTextView.setText(name[position]);
+            mTextView.setText(names[position]);
 
             return view;
         }
