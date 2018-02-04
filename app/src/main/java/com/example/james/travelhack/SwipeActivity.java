@@ -26,7 +26,7 @@ public class SwipeActivity extends AppCompatActivity {
     private int i;
     private Button button;
     private ArrayList<Object> toGO;
-    private String[] newArr = new String[3];
+    private String[] newArr = new String[4];
     private TextView textview;
 
     //@Nullable @BindView(R.id.frame) SwipeFlingAdapterView flingContainer;
@@ -143,7 +143,7 @@ public class SwipeActivity extends AppCompatActivity {
 
     }
     public void openILActivity(){
-        Intent i = new Intent(this,IteneraryListActivity.class);
+        Intent i = new Intent(this,List.class);
 
         i.putExtra("selections", newArr);
         startActivity(i);
