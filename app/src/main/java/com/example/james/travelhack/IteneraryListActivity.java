@@ -1,33 +1,48 @@
 package com.example.james.travelhack;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+
 public class IteneraryListActivity extends AppCompatActivity {
 
-    ListView mListView;
-    //Intent i = getIntent();
-    //Bundle extras=i.getExtras();
-    //String name[]= extras.getStringArray("Gee");
-    //Bundle b = this.getIntent().getExtras();
-    //String[] name=b.getStringArray("Gee");
-    int[] images = {R.drawable.image1,
-            R.drawable.image2
-    };
-    //String [] name = getIntent().getExtras().getStringArray("GeeGee");
+    private int timeAtLocation = 7200;
+    String[] locations;
+    String[] arrival = new String[3];
+    String[] leave = new String[3];
+    String[] duration = new String[3];
+    String departure;
 
-    String[] names = {
-            "CN Tower",
-            "Ripley's Aquarium"
+    private TextView tvLeave1, tvLeave2, tvLeave3, tvLeave4;
+    private TextView tvArrival1, tvArrival2, tvArrival3;
+    private TextView tvDuration1, tvDuration2, tvDuration3;
+    private TextView tvLocation1, tvLocation2, tvLocation3;
 
-    };
+
+    private int currTime;
+    private String TAG = MainActivity.class.getName();
+    private int departureTime = 1517942615;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,41 +50,350 @@ public class IteneraryListActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String[] selections = i.getStringArrayExtra("selections");
-        setContentView(R.layout.activity_itenerary_list);
-        mListView = (ListView) findViewById(R.id.listView);
 
-        CustomAdaptor customAdaptor = new CustomAdaptor();
-        mListView.setAdapter(customAdaptor);
+        locations = selections;
+
+        new JsonTask1().execute(createURL(locations[0], locations[1], departureTime));
+
     }
 
-    class CustomAdaptor extends BaseAdapter {
+    private class JsonTask1 extends AsyncTask<String, String, String> {
 
-        @Override
-        public int getCount() {
-            return images.length;
+        protected void onPreExecute() {
+            super.onPreExecute();
         }
 
-        @Override
-        public Object getItem(int position) {
+        protected String doInBackground(String... params) {
+
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line+"\n");
+                    //Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+
+                }
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             return null;
         }
 
         @Override
-        public long getItemId(int position) {
-            return 0;
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            JSONObject object = null;
+            try {
+                object = new JSONObject(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                currTime = (int)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("arrival_time").get("value");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                duration[0] = (String)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("duration").get("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                arrival[0] = (String)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("arrival_time").get("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                departure = (String)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("departure_time").get("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            currTime += timeAtLocation;
+
+            new JsonTask2().execute(createURL(locations[1], locations[2], currTime));
+
         }
-        //test
+    }//Json Task 1
+
+
+    /****************************************************************************************************/
+
+
+    private class JsonTask2 extends AsyncTask<String, String, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        protected String doInBackground(String... params) {
+
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line+"\n");
+                    //Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+
+                }
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.itenerarylayout, parent, false);
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
 
-            ImageView mImageView = (ImageView) view.findViewById(R.id.imageView);
-            TextView mTextView = (TextView) view.findViewById(R.id.textView);
+            JSONObject object = null;
+            try {
+                object = new JSONObject(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-            mImageView.setImageResource(images[position]);
-            mTextView.setText(names[position]);
+            try {
+                currTime = (int)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("arrival_time").get("value");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-            return view;
+            try {
+                duration[1] = (String)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("duration").get("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                arrival[1] = (String)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("arrival_time").get("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                leave[0] = (String)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("departure_time").get("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            currTime += timeAtLocation;
+
+            new JsonTask3().execute(createURL(locations[2], locations[3], currTime));
+
+
         }
+    }//Json Task 2
+
+
+    /***************************************************************/
+
+    private class JsonTask3 extends AsyncTask<String, String, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        protected String doInBackground(String... params) {
+
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line+"\n");
+                    //Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+
+                }
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            JSONObject object = null;
+            try {
+                object = new JSONObject(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                currTime = (int)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("arrival_time").get("value");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                duration[2] = (String)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("duration").get("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                arrival[2] = (String)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("arrival_time").get("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                leave[1] = (String)object.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("departure_time").get("text");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+            tvLeave1 = (TextView)findViewById(R.id.tvLeave0);
+            tvLeave1.setText("Leave home at " + departure);
+            tvLeave2 = (TextView)findViewById(R.id.tvLeave1);
+            tvLeave2.setText("Leave at " + leave[0]);
+            tvLeave3 = (TextView)findViewById(R.id.tvLeave2);
+            tvLeave3.setText("Leave at " + leave[1]);
+
+            tvArrival1 = (TextView)findViewById(R.id.tvArrival1);
+            tvArrival1.setText("Arrive at: " + arrival[0]);
+            tvArrival2 = (TextView)findViewById(R.id.tvArrival2);
+            tvArrival2.setText("Arrive at: " + arrival[1]);
+            tvArrival3 = (TextView)findViewById(R.id.tvArrival3);
+            tvArrival3.setText("Arrive at: " + arrival[2]);
+
+            tvDuration1 = (TextView)findViewById(R.id.tvDuration1);
+            tvDuration1.setText("Duration: " + duration[0]);
+            tvDuration2 = (TextView)findViewById(R.id.tvDuration2);
+            tvDuration2.setText("Duration: " + duration[1]);
+            tvDuration3 = (TextView)findViewById(R.id.tvDuration3);
+            tvDuration3.setText("Duration: " + duration[2]);
+
+            tvLocation1 = (TextView)findViewById(R.id.tvPlace1);
+            tvLocation1.setText(locations[0]);
+            tvLocation2 = (TextView)findViewById(R.id.tvPlace2);
+            tvLocation2.setText(locations[1]);
+            tvLocation3 = (TextView)findViewById(R.id.tvPlace3);
+            tvLocation3.setText(locations[2]);
+
+
+        }
+    }//Json Task 3
+
+
+    private String createURL(String origin, String destination, int departureTime) {
+
+        try {
+
+            origin = URLEncoder.encode(origin, "UTF-8");
+            destination = URLEncoder.encode(destination, "UTF-8");
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&departure_time=" + departureTime + "&mode=transit&key=AIzaSyBU8yxgy0MpZD3DXkkf_c5Cm8fIEikM3i4";
+
     }
+
+
 }

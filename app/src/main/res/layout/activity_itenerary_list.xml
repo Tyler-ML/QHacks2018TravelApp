@@ -1,11 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:text="Home" />
+
+    <TextView
+        android:id="@+id/tvLeave0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:text="Leave your home at: 4:20pm" />
+
+    <Button
+        android:id="@+id/btnDirections1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLeave0"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="1" />
+
+    <TextView
+        android:id="@+id/tvArrival1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPlace1"
+        android:layout_marginTop="18dp"
+        android:layout_toStartOf="@+id/btnDirections1"
+        android:text="Arrive at: 4:20pm" />
+
+    <TextView
+        android:id="@+id/tvLeave1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvArrival1"
+        android:layout_alignBottom="@+id/tvArrival1"
+        android:layout_toEndOf="@+id/btnDirections1"
+        android:text="Leave at: 4:20pm" />
+
+    <TextView
+        android:id="@+id/tvPlace1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnDirections1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Location 1" />
+
+    <Button
+        android:id="@+id/btnDirections2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLeave1"
+        android:layout_marginTop="21dp"
+        android:layout_toEndOf="@+id/tvArrival1"
+        android:text="2" />
+
+    <TextView
+        android:id="@+id/tvPlace2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnDirections2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="Location 2" />
+
+    <TextView
+        android:id="@+id/tvArrival2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPlace2"
+        android:layout_marginTop="17dp"
+        android:layout_toStartOf="@+id/btnDirections2"
+        android:text="Arrive at: 4:20pm" />
+
+    <TextView
+        android:id="@+id/tvLeave2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvArrival2"
+        android:layout_toEndOf="@+id/btnDirections2"
+        android:text="Leave at: 4:20pm" />
+
+    <Button
+        android:id="@+id/btnDirections3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLeave2"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/tvArrival2"
+        android:text="3" />
+
+    <TextView
+        android:id="@+id/tvPlace3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnDirections3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Location 3" />
+
+    <TextView
+        android:id="@+id/tvArrival3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPlace3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:text="Arrive at 4:20pm" />
+
+    <TextView
+        android:id="@+id/tvDuration1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnDirections1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/tvArrival3"
+        android:text="Duration: 69 min" />
+
+    <TextView
+        android:id="@+id/tvDuration2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvDuration1"
+        android:layout_alignTop="@+id/btnDirections2"
+        android:layout_marginTop="13dp"
+        android:text="Duration: 69 min" />
+
+    <TextView
+        android:id="@+id/tvDuration3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnDirections3"
+        android:layout_alignStart="@+id/tvDuration2"
+        android:layout_marginBottom="10dp"
+        android:text="Duration: 69 min" />
+</RelativeLayout>
